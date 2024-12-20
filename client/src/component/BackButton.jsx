@@ -8,7 +8,7 @@ const BackButton = ({ destination = '/' }) => {
     <div className='flex'>
         <Link 
             to={destination}
-            className='px-4 py-1 text-white rounded-lg bg-sky-800 w-fit'
+            className='px-4 py-1 text-white bg-blue-900 rounded-lg w-fit'
         >
             <FontAwesomeIcon icon={faArrowLeft} />
         </Link> 

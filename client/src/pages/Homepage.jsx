@@ -26,7 +26,7 @@ const Homepage = () => {
   return (
     <div className="p-4">
       <div className="flex items-center justify-between">
-        <h1 className="my-8 text-3xl font-bold">Book Lists</h1>
+        <h1 className="my-8 text-3xl font-bold text-white">Book Lists</h1>
         <Link 
           to="/book/create"
           className="p-2 text-white transition-colors bg-blue-600 rounded-full hover:bg-blue-700"

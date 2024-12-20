@@ -3,7 +3,7 @@ import Spinner from '../component/Spinner'
 import BackButton from '../component/BackButton'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { useSnackbar } from 'material-ui-snackbar-provider'
+import { useSnackbar } from 'notistack'
 
 const AddBook = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,7 +12,7 @@ const AddBook = () => {
   const [publishYear, setPublishYear] = useState('');
   const [country, setCountry] = useState('');
   const navigate = useNavigate();
-  const snackbar = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -27,68 +27,69 @@ const AddBook = () => {
       .then(res => {
         setIsLoading(false);
         navigate('/');
-        snackbar.showMessage('Book added succesfully');
+        enqueueSnackbar('Book added successfully', { variant: 'success' });
       })
       .catch(err => {
         setIsLoading(false);
-        snackbar.showMessage('Failed to add book');
+        enqueueSnackbar('Failed to add book', { variant: 'error' });
         console.log(err);
       })
   }
 
   return (
-    <div className="max-w-4xl p-4 mx-auto">
+    <div className="max-w-4xl p-4 mx-auto ">
       <div className="flex items-center gap-x-4">
         <BackButton />
-        <h1 className="text-3xl font-bold text-gray-800">Add Book</h1>
+        <h1 className="text-3xl font-bold text-white">Add Book</h1>
       </div>
 
       {isLoading ? (
         <Spinner />
       ) : (
         <div className="mt-8">
-          <form onSubmit={handleSubmit} className="p-6 space-y-6 bg-white rounded-lg shadow-md">
+          <form onSubmit={handleSubmit} className="p-6 space-y-6 bg-white bg-blue-900 rounded-lg shadow-md">
             <div className="space-y-2">
-              <label className="block font-medium text-gray-700">Title</label>
+              <label className="block font-medium text-white">Title</label>
               <input
                 type="text"
                 value={bookName}
                 onChange={e => setBookName(e.target.value)}
                 className="w-full px-4 py-2 transition-colors border border-gray-300 rounded-md focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                placeholder="Enter book title"
+                placeholder="e.g., The Fellowship of the Rings"
               />
             </div>
 
             <div className="space-y-2">
-              <label className="block font-medium text-gray-700">Author</label>
+              <label className="block font-medium text-white">Author</label>
               <input
                 type="text"
                 value={author}
                 onChange={e => setAuthor(e.target.value)}
                 className="w-full px-4 py-2 transition-colors border border-gray-300 rounded-md focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                placeholder="Enter author name"
+                placeholder="e.g., J.R.R. Tolkien"
               />
             </div>
 
             <div className="space-y-2">
-              <label className="block font-medium text-gray-700">Publish Year</label>
+              <label className="block font-medium text-white">Publish Year</label>
               <input
-                type="text"
+                type="number"
                 value={publishYear}
                 onChange={e => setPublishYear(e.target.value)}
                 className="w-full px-4 py-2 transition-colors border border-gray-300 rounded-md focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                placeholder="Enter publish year"
+                placeholder="e.g., 1954"
+                
               />
             </div>
 
             <div className="space-y-2">
-              <label className="block font-medium text-gray-700">Country</label>
+              <label className="block font-medium text-white">Country</label>
               <input
                 type="text"
                 value={country}
                 onChange={e => setCountry(e.target.value)}
                 className="w-full px-4 py-2 transition-colors border border-gray-300 rounded-md focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                placeholder="Enter country"
+                placeholder="e.g., United Kingdom"
               />
             </div>
 

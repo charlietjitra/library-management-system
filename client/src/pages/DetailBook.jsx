@@ -9,7 +9,7 @@ const DetailBook = () => {
   const [books, setBooks] = useState([]);
   const { id } = useParams();
 
-  useEffect(()=> {
+  useEffect(() => {
     setIsLoading(true);
     axios.get(`http://localhost:3000/book/${id}`)
       .then(res => {
@@ -20,45 +20,42 @@ const DetailBook = () => {
         console.log(err);
         setIsLoading(false);
       })
-  },[]);
+  }, []);
+
+  const DetailRow = ({ label, value }) => (
+    <div className="py-4 border-b border-gray-100 last:border-0">
+      <span className="inline-block w-32 font-medium text-white">{label}</span>
+      <span className="text-white">{value}</span>
+    </div>
+  );
 
   return (
-    <div className='p-4'>
-      <BackButton />
-      <h1 className='my-4 text-3xl'>Book Details</h1>
-      {isLoading ? ( 
-        <Spinner/>
+    <div className="max-w-4xl p-4 mx-auto">
+      <div className="flex items-center mb-6 gap-x-4">
+        <BackButton />
+        <h1 className="text-3xl font-bold text-white">Book Details</h1>
+      </div>
+
+      {isLoading ? (
+        <Spinner />
       ) : (
-         <div className='flex flex-col border-2 border-sky-400 rounded-xl'>
-          <div className='my-4'> 
-            <span className='mr-4 text-xl text-gray-400'>Id</span>
-            <span>{books._id}</span>
+        <div className="overflow-hidden bg-blue-900 rounded-lg shadow-md">
+          <div className="p-6 space-y-1">
+            <DetailRow label="ID" value={books._id} />
+            <DetailRow label="Title" value={books.bookName} />
+            <DetailRow label="Author" value={books.author} />
+            <DetailRow label="Publish Year" value={books.publishYear} />
+            <DetailRow label="Country" value={books.country} />
+            <DetailRow
+              label="Added At"
+              value={new Date(books.createdAt).toLocaleString()}
+            />
+            <DetailRow
+              label="Updated At"
+              value={new Date(books.updatedAt).toLocaleString()}
+            />
           </div>
-          <div className='my-4'> 
-            <span className='mr-4 text-xl text-gray-400'>Title</span>
-            <span>{books.bookName}</span>
-          </div>
-          <div className='my-4'> 
-            <span className='mr-4 text-xl text-gray-400'>Author</span>
-            <span>{books.author}</span>
-          </div>
-          <div className='my-4'> 
-            <span className='mr-4 text-xl text-gray-400'>Publish Year</span>
-            <span>{books.publishYear}</span>
-          </div>
-          <div className='my-4'> 
-            <span className='mr-4 text-xl text-gray-400'>Country</span>
-            <span>{books.country}</span>
-          </div>
-          <div className='my-4'> 
-            <span className='mr-4 text-xl text-gray-400'>Book Added At</span>
-            <span>{new Date(books.createdAt).toString()}</span>
-          </div>
-          <div className='my-4'> 
-            <span className='mr-4 text-xl text-gray-400'>Last Updated At</span>
-            <span>{new Date(books.updatedAt).toString()}</span>
-          </div>
-         </div>
+        </div>
       )}
     </div>
   )

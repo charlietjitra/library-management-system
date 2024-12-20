@@ -34,7 +34,7 @@ const DeleteBook = () => {
         <div className='flex flex-col items-center bg-blue-900 rounded-xl w-[600px] p-8 mx-auto'>
           <h1 className='text-2xl text-white'>You sure you wanna delete this book </h1>
 
-          <button onClick={handleDelete} className='w-full p-4 m-8 text-white bg-red-600'>
+          <button onClick={handleDelete} className='w-full p-4 m-8 text-white bg-red-600 rounded-xl'>
             Yes, I am sure
           </button>
         </div>

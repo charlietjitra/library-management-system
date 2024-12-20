@@ -47,7 +47,7 @@ const AddBook = () => {
         <Spinner />
       ) : (
         <div className="mt-8">
-          <form onSubmit={handleSubmit} className="p-6 space-y-6 bg-white bg-blue-900 rounded-lg shadow-md">
+          <form onSubmit={handleSubmit} className="p-6 space-y-6 bg-blue-900 rounded-lg shadow-md">
             <div className="space-y-2">
               <label className="block font-medium text-white">Title</label>
               <input

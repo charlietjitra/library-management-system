@@ -27,7 +27,7 @@ const BookCard = ({book}) => {
         </div>
         </div>
         
-        <div className="flex justify-end px-6 py-4 space-x-4 bg-blue-900 border-t bg-gray-50">
+        <div className="flex justify-end px-6 py-4 space-x-4 bg-blue-900">
         <Link 
             to={`/book/details/${book._id}`}
             className="text-blue-600 hover:text-blue-800"
